@@ -378,3 +378,134 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(err => console.warn("Menggunakan daftar kategori cadangan di navigasi:", err));
     }
 });
+// ==========================================
+// 6. MESIN KOMENTAR & BALASAN ADMIN OTOMATIS (GOOGLE SHEETS)
+// ==========================================
+document.addEventListener("DOMContentLoaded", function() {
+    const komentarSection = document.querySelector(".komentar-section");
+    if (!komentarSection) return;
+
+    // Gunakan URL Web App Google Apps Script yang sama dengan Form Konsultasi
+    const KOMENTAR_APP_URL = "https://script.google.com/macros/s/AKfycbyvCrVdW96MpZRwurjSVUo5BN6K4nRbkMqLqFE7I3_WmYwieNhsSdHqh_PoYfUSLw4o/exec";
+
+    // Deteksi nama file halaman secara otomatis (contoh: detail-kombinasi-200.html)
+    const pathParts = window.location.pathname.split("/");
+    const halamanId = pathParts[pathParts.length - 1] || "detail-paket";
+
+    // Bangun tampilan Form & Daftar Komentar sesuai class di detail.css Anda
+    komentarSection.innerHTML = `
+        <h3>💬 Diskusi & Pertanyaan</h3>
+        <form id="form-diskusi-paket" class="form-komentar">
+            <input type="text" id="komen-nama" class="input-nama" placeholder="Nama Anda (Contoh: Pak Hendra - Pahoman)" required>
+            <textarea id="komen-teks" class="input-teks" placeholder="Tulis pertanyaan atau pengalaman Anda mengenai paket ini..." required></textarea>
+            <button type="submit" id="btn-submit-komen" class="btn-kirim-komentar">Kirim Pertanyaan / Ulasan</button>
+        </form>
+        <div id="daftar-komentar-container">
+            <p style="color:#888; font-size:0.9rem;">Memuat diskusi...</p>
+        </div>
+    `;
+
+    const listContainer = document.getElementById("daftar-komentar-container");
+    const formDiskusi = document.getElementById("form-diskusi-paket");
+    const btnSubmit = document.getElementById("btn-submit-komen");
+
+    // Fungsi pengaman teks HTML
+    function escapeHTML(str) {
+        return String(str || "").replace(/[&<>"']/g, function(m) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m];
+        });
+    }
+
+    // Fungsi merender daftar komentar & balasan Admin
+    function renderKomentar(dataList) {
+        if (!dataList || dataList.length === 0) {
+            listContainer.innerHTML = `<p style="color:#888; font-size:0.92rem; font-style:italic;">Belum ada diskusi di paket ini. Jadilah yang pertama bertanya!</p>`;
+            return;
+        }
+
+        let html = "";
+        dataList.forEach(item => {
+            const inisial = (item.nama || "P").trim().charAt(0).toUpperCase();
+            html += `
+                <div class="komentar-item">
+                    <div class="komentar-avatar">${escapeHTML(inisial)}</div>
+                    <div class="komentar-konten">
+                        <div class="komentar-header">
+                            <strong>${escapeHTML(item.nama)}</strong>
+                            <span class="komentar-waktu">• ${escapeHTML(item.waktu)}</span>
+                        </div>
+                        <p>${escapeHTML(item.komentar)}</p>
+                    </div>
+                </div>
+            `;
+
+            // Jika kolom Balasan Admin di Google Sheets sudah diisi, tampilkan di bawahnya!
+            if (item.balasan && item.balasan.trim() !== "") {
+                html += `
+                    <div class="komentar-item admin-reply">
+                        <div class="komentar-avatar admin-avatar">A</div>
+                        <div class="komentar-konten">
+                            <div class="komentar-header">
+                                <strong>Admin Al-Kautsar Bumindo</strong>
+                                <span class="badge-admin">Official ✓</span>
+                            </div>
+                            <p>${escapeHTML(item.balasan)}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+
+        listContainer.innerHTML = html;
+    }
+
+    // 1. Tarik daftar komentar dari Google Sheets
+    function muatKomentar() {
+        if (!KOMENTAR_APP_URL || KOMENTAR_APP_URL === "https://script.google.com/macros/s/AKfycbyvCrVdW96MpZRwurjSVUo5BN6K4nRbkMqLqFE7I3_WmYwieNhsSdHqh_PoYfUSLw4o/exec") {
+            renderKomentar([]);
+            return;
+        }
+        fetch(`${KOMENTAR_APP_URL}?halaman=${encodeURIComponent(halamanId)}`)
+            .then(res => res.json())
+            .then(data => renderKomentar(data))
+            .catch(() => {
+                listContainer.innerHTML = `<p style="color:#888; font-size:0.9rem;">Belum ada komentar.</p>`;
+            });
+    }
+
+    muatKomentar();
+
+    // 2. Kirim komentar baru saat tombol diklik
+    formDiskusi.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const nama = document.getElementById("komen-nama").value.trim();
+        const komentar = document.getElementById("komen-teks").value.trim();
+        if (!nama || !komentar) return;
+
+        btnSubmit.disabled = true;
+        btnSubmit.textContent = "Mengirim...";
+
+        const payload = {
+            action: "kirim_komentar",
+            halaman: halamanId,
+            nama: nama,
+            komentar: komentar
+        };
+
+        fetch(KOMENTAR_APP_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        }).then(() => {
+            formDiskusi.reset();
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = "Kirim Pertanyaan / Ulasan";
+            // Muat ulang daftar komentar setelah 1,5 detik
+            setTimeout(muatKomentar, 1500);
+        }).catch(() => {
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = "Kirim Pertanyaan / Ulasan";
+        });
+    });
+});
