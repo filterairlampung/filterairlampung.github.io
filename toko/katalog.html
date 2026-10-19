@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Sparepart & Media Filter Air - Al-Kautsar Bumindo</title>
+    
+    <!-- Memanggil CSS Global & Mobile Induk -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../mobile.css" media="screen and (max-width: 768px)">
+    
+    <!-- Memanggil FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Memanggil CSS Khusus Halaman Toko -->
+    <link rel="stylesheet" href="toko.css">
+</head>
+<body class="toko-page">
+
+    <!-- HEADER OTOMATIS (Di-inject oleh ../script.js) -->
+    <header class="site-header"></header>
+
+    <main class="toko-main">
+        
+        <!-- ==========================================
+             1. BANNER TOKO & KOLOM LIVE SEARCH
+             ========================================== -->
+        <section class="toko-hero">
+            <div class="toko-hero-content">
+                <div class="toko-badge-top">
+                    <i class="fas fa-store"></i> Pusat Grosir & Eceran Sparepart Filter Air Lampung
+                </div>
+                <h1>Toko Retail, Media Filter & Perlengkapan Depot</h1>
+                <p>Beli eceran maupun partai besar (grosir/qoly) lebih hemat. Pilih barang, atur jumlah untuk mendapatkan <strong>Harga Grosir Otomatis</strong>, dan pesan langsung via WhatsApp.</p>
+
+                <!-- Bilah Pencarian Cepat (Live Search) -->
+                <div class="toko-search-wrapper">
+                    <div class="toko-search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="input-cari-produk" placeholder="Ketik nama barang (contoh: Tutup Galon, Cartridge, CTO, Silika, FRP)...">
+                        <button type="button" id="btn-reset-cari" class="btn-clear-search" style="display: none;" title="Hapus pencarian">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             2. NAVIGASI FILTER KATEGORI & URUTAN
+             ========================================== -->
+        <section class="toko-toolbar">
+            <!-- Deretan Tombol Kategori (Diisi otomatis & dinamis oleh toko.js) -->
+            <div class="kategori-scroll-wrapper">
+                <div class="kategori-pills" id="kategori-container">
+                    <button class="kat-pill active" data-kategori="terlaris">
+                        🔥 Paling Banyak Dipesan
+                    </button>
+                    <button class="kat-pill" data-kategori="semua">
+                        📦 Semua Produk
+                    </button>
+                    <!-- Tombol kategori lain dari Google Sheets akan ditambahkan otomatis di sini -->
+                </div>
+            </div>
+
+            <!-- Baris Info Jumlah Produk & Urutan -->
+            <div class="toko-subbar">
+                <div class="produk-counter">
+                    Menampilkan <strong id="jumlah-produk-tampil">0</strong> produk
+                    <span id="status-sumber-data" class="badge-sumber">Memuat data...</span>
+                </div>
+                <div class="toko-sort">
+                    <label for="select-urutkan"><i class="fas fa-sort-amount-down"></i> Urutkan:</label>
+                    <select id="select-urutkan">
+                        <option value="default">Rekomendasi / Terlaris</option>
+                        <option value="termurah">Harga: Terendah ke Tertinggi</option>
+                        <option value="termahal">Harga: Tertinggi ke Terendah</option>
+                        <option value="nama-az">Nama Barang (A - Z)</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             3. GRID DAFTAR PRODUK (ALA MARKETPLACE)
+             ========================================== -->
+        <section class="toko-katalog-section">
+            <!-- Loading State saat menarik data Google Sheets -->
+            <div id="loading-produk" class="toko-loading">
+                <div class="spinner"></div>
+                <p>Sedang memuat daftar harga produk terbaru...</p>
+            </div>
+
+            <!-- Wadah Utama Kartu Produk -->
+            <div id="produk-grid" class="produk-grid">
+                <!-- Kartu produk akan di-render otomatis oleh toko.js -->
+            </div>
+
+            <!-- Pesan Jika Pencarian Tidak Ditemukan -->
+            <div id="produk-kosong" class="produk-kosong" style="display: none;">
+                <i class="fas fa-box-open"></i>
+                <h3>Barang tidak ditemukan</h3>
+                <p>Coba gunakan kata kunci lain atau tanyakan langsung ketersediaan stok barang ke Admin kami.</p>
+                <button type="button" id="btn-tampil-semua" class="btn-reset-filter">Tampilkan Semua Produk</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================
+         4. POP-UP MODAL DETAIL & KALKULATOR GROSIR (OPSI A)
+         ========================================== -->
+    <div id="modal-produk-overlay" class="modal-overlay">
+        <div class="modal-box" role="dialog" aria-modal="true">
+            <!-- Header Modal -->
+            <div class="modal-header">
+                <div class="modal-kat-wrap">
+                    <span id="modal-kategori" class="modal-badge-kat">Kategori</span>
+                    <span id="modal-badge-terlaris" class="modal-badge-hot" style="display: none;">🔥 Terlaris</span>
+                </div>
+                <button type="button" id="btn-tutup-modal" class="btn-close-modal" title="Tutup">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Isi Modal -->
+            <div class="modal-body">
+                <h2 id="modal-nama-produk">Nama Produk</h2>
+                <p class="modal-satuan-info">Satuan Pembelian: <strong id="modal-satuan">Pcs</strong></p>
+
+                <!-- Tabel / Kartu Tingkatan Harga (Ecer vs Grosir) -->
+                <div class="grosir-tier-section">
+                    <div class="tier-section-title">
+                        <i class="fas fa-tags"></i> Daftar Harga (Otomatis Turun Sesuai Jumlah Beli)
+                    </div>
+                    <div id="modal-tier-grid" class="tier-grid">
+                        <!-- Kotak Harga Ecer, Grosir 1, Grosir 2 diisi dinamis oleh toko.js -->
+                    </div>
+                </div>
+
+                <!-- Pengatur Jumlah Barang (Quantity) & Tombol Cepat -->
+                <div class="modal-qty-section">
+                    <div class="qty-header-row">
+                        <label for="modal-input-qty">Jumlah Pembelian:</label>
+                        <!-- Tombol Pintas Jumlah Grosir -->
+                        <div id="modal-quick-qty" class="quick-qty-pills">
+                            <!-- Diisi otomatis misal: [1 Pcs] [Min 5 Pcs] [Min 12 Pcs] -->
+                        </div>
+                    </div>
+
+                    <div class="qty-control-wrapper">
+                        <div class="qty-stepper">
+                            <button type="button" id="btn-modal-minus" class="btn-qty"><i class="fas fa-minus"></i></button>
+                            <input type="number" id="modal-input-qty" value="1" min="1">
+                            <button type="button" id="btn-modal-plus" class="btn-qty"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <span id="modal-qty-satuan-label" class="qty-unit-text">Pcs</span>
+                    </div>
+                </div>
+
+                <!-- Kotak Ringkasan Subtotal Live -->
+                <div class="modal-subtotal-box">
+                    <div class="subtotal-row">
+                        <span>Harga Satuan Aktif:</span>
+                        <strong id="modal-harga-aktif" class="harga-aktif-teks">Rp 0</strong>
+                    </div>
+                    <div class="subtotal-row total-row">
+                        <span>Subtotal Barang Ini:</span>
+                        <strong id="modal-subtotal" class="subtotal-teks">Rp 0</strong>
+                    </div>
+                    <div id="modal-hemat-badge" class="hemat-alert" style="display: none;">
+                        <i class="fas fa-check-circle"></i> Harga Grosir Aktif! Anda hemat <strong id="modal-nominal-hemat">Rp 0</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Modal -->
+            <div class="modal-footer">
+                <button type="button" id="btn-masukkan-keranjang" class="btn-add-cart-main">
+                    <i class="fas fa-cart-plus"></i> + Masukkan ke Keranjang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         5. TOMBOL KERANJANG MELAYANG (FLOATING CART BAR)
+         ========================================== -->
+    <button type="button" id="btn-buka-keranjang" class="floating-cart-btn" title="Lihat Keranjang Belanja">
+        <div class="cart-icon-wrap">
+            <i class="fas fa-shopping-basket"></i>
+            <span id="cart-count-badge" class="cart-badge-count">0</span>
+        </div>
+        <div class="cart-btn-info">
+            <span class="cart-btn-label">Keranjang Belanja</span>
+            <strong id="cart-total-float">Rp 0</strong>
+        </div>
+    </button>
+
+    <!-- ==========================================
+         6. SLIDE-OUT CART DRAWER (PANEL SAMPING KERANJANG)
+         ========================================== -->
+    <div id="cart-drawer-overlay" class="cart-overlay"></div>
+    <aside id="cart-drawer" class="cart-drawer">
+        <!-- Header Keranjang -->
+        <div class="cart-drawer-header">
+            <div class="cart-title">
+                <i class="fas fa-shopping-basket"></i> Keranjang Belanja (<span id="drawer-cart-count">0</span>)
+            </div>
+            <button type="button" id="btn-tutup-keranjang" class="btn-close-drawer" title="Tutup Keranjang">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Body Keranjang (Daftar Item + Form Checkout) -->
+        <div class="cart-drawer-body">
+            <!-- State Kosong -->
+            <div id="cart-empty-state" class="cart-empty">
+                <i class="fas fa-shopping-cart"></i>
+                <h4>Keranjang Anda masih kosong</h4>
+                <p>Silakan pilih produk sparepart, media filter, atau perlengkapan depot di katalog.</p>
+            </div>
+
+            <!-- Daftar Item Keranjang -->
+            <div id="cart-items-list" class="cart-items-list">
+                <!-- Item keranjang di-render otomatis oleh toko.js -->
+            </div>
+
+            <!-- Tombol Kosongkan Keranjang -->
+            <div id="cart-clear-wrap" class="cart-clear-wrap" style="display: none;">
+                <button type="button" id="btn-kosongkan-keranjang" class="btn-clear-cart">
+                    <i class="fas fa-trash-alt"></i> Kosongkan Keranjang
+                </button>
+            </div>
+
+            <!-- Formulir Singkat Pengiriman / Pengambilan -->
+            <div id="cart-checkout-form" class="cart-checkout-form" style="display: none;">
+                <h4><i class="fas fa-user-check"></i> Data Pemesan & Pengiriman</h4>
+                
+                <div class="c-form-group">
+                    <label for="checkout-nama">Nama Pemesan / Nama Depot *</label>
+                    <input type="text" id="checkout-nama" placeholder="Contoh: Budi (Depot Berkah Jaya)" required>
+                </div>
+
+                <div class="c-form-group">
+                    <label for="checkout-metode">Metode Pengambilan / Pengiriman *</label>
+                    <select id="checkout-metode">
+                        <option value="Kirim ke Alamat">🚚 Kirim ke Alamat Saya</option>
+                        <option value="Ambil di Cabang Bandar Lampung (Korpri)">🏪 Ambil di Toko Cabang Korpri (Bandar Lampung)</option>
+                        <option value="Ambil di Cabang Pringsewu">🏪 Ambil di Toko Cabang Pringsewu</option>
+                    </select>
+                </div>
+
+                <div class="c-form-group" id="grup-alamat-kirim">
+                    <label for="checkout-alamat">Alamat Lengkap / Kota di Lampung *</label>
+                    <textarea id="checkout-alamat" rows="2" placeholder="Masukkan alamat lengkap pengiriman Anda..."></textarea>
+                </div>
+
+                <div class="c-form-group">
+                    <label for="checkout-catatan">Catatan Tambahan (Opsional)</label>
+                    <input type="text" id="checkout-catatan" placeholder="Contoh: Tolong disiapkan pagi ini...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Keranjang (Total & Tombol WA) -->
+        <div class="cart-drawer-footer" id="cart-drawer-footer" style="display: none;">
+            <div class="cart-summary-rows">
+                <div class="summary-line hemat-line" id="drawer-row-hemat" style="display: none;">
+                    <span>Total Hemat Harga Grosir:</span>
+                    <strong id="drawer-total-hemat">- Rp 0</strong>
+                </div>
+                <div class="summary-line grand-total-line">
+                    <span>Total Estimasi Belanja:</span>
+                    <strong id="drawer-grand-total">Rp 0</strong>
+                </div>
+            </div>
+            <button type="button" id="btn-checkout-wa" class="btn-checkout-wa">
+                <i class="fab fa-whatsapp"></i> Pesan Sekarang via WhatsApp
+            </button>
+        </div>
+    </aside>
+
+    <!-- Notifikasi Toast Singkat (Saat Barang Masuk Keranjang) -->
+    <div id="toast-notif" class="toast-notif">
+        <i class="fas fa-check-circle"></i> <span id="toast-teks">Produk berhasil ditambahkan ke keranjang!</span>
+    </div>
+
+    <!-- FOOTER OTOMATIS (Di-inject oleh ../script.js) -->
+    <footer class="site-footer"></footer>
+
+    <!-- Memanggil Script Induk & Script Khusus Toko -->
+    <script src="../script.js"></script>
+    <script src="toko.js"></script>
+</body>
+</html>

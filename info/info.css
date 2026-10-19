@@ -1,0 +1,578 @@
+/* =========================================
+   PENGATURAN DASAR HALAMAN INFO
+   ========================================= */
+body.info-page {
+    background-color: #f7f9fc;
+    color: #333;
+}
+
+main.info-main {
+    padding: 0 0 60px 0 !important; /* Nol di atas karena ada banner hero */
+}
+
+/* =========================================
+   1. HERO PROFIL PERUSAHAAN
+   ========================================= */
+.info-hero {
+    background: linear-gradient(135deg, #0b283d 0%, #00B4D8 100%);
+    padding: 80px 20px;
+    text-align: left;
+    color: #ffffff;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    margin-bottom: 50px;
+    box-shadow: 0 10px 30px rgba(11, 40, 61, 0.1);
+}
+
+/* =========================================
+   FIX BENTROK HERO & ANIMASI HALUS PORTOFOLIO
+   ========================================= */
+.info-hero .hero-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    max-width: 820px !important;
+    margin: 0 auto !important;
+    gap: 0 !important;
+}
+
+.info-hero .badge-profil {
+    width: auto !important;
+    align-self: center !important;
+    margin-bottom: 18px !important;
+}
+
+.info-hero h1 {
+    width: 100% !important;
+    text-align: center !important;
+    margin-bottom: 14px !important;
+}
+
+.info-hero p {
+    width: 100% !important;
+    max-width: 720px !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+}
+
+/* Animasi Masuk yang Halus untuk Kartu Portofolio */
+@keyframes portoFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.porto-item {
+    animation: portoFadeIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.badge-profil {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.info-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 15px;
+}
+
+.info-hero p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #e0f7fa;
+}
+
+/* =========================================
+   2. SEJARAH & FILOSOFI
+   ========================================= */
+.info-sejarah {
+    max-width: 1100px;
+    margin: 0 auto 60px auto;
+    padding: 0 20px;
+}
+
+.sejarah-container {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: left;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eaeaea;
+}
+
+.sejarah-teks h2 {
+    color: #0b283d;
+    font-size: 2rem;
+    text-align: left;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.garis-aksen {
+    width: 60px;
+    height: 4px;
+    background: #00B4D8;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+
+.sejarah-teks p {
+    font-size: 1.05rem;
+    color: #555;
+    text-align: left;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.sejarah-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.visual-box {
+    width: 250px;
+    height: 250px;
+    background: #eef7f9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: #00B4D8;
+    font-size: 6rem;
+    box-shadow: inset 0 0 40px rgba(0, 180, 216, 0.1);
+}
+
+.tahun-badge {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background: #366B2B;
+    color: #fff;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(54, 107, 43, 0.3);
+    border: 4px solid #fff;
+}
+
+.tahun-badge strong {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.tahun-badge span {
+    font-size: 0.7rem;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* =========================================
+   3. MENGAPA MEMILIH KAMI (4 KEUNGGULAN)
+   ========================================= */
+.info-keunggulan {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.keunggulan-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.keunggulan-header h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #0b283d;
+    margin-bottom: 10px;
+}
+
+.keunggulan-header p {
+    font-size: 1.05rem;
+    color: #64748b;
+}
+
+.k-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.k-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 30px 25px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.k-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #00B4D8;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+
+.k-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(11, 40, 61, 0.08);
+}
+
+.k-card:hover::after {
+    transform: scaleX(1);
+}
+
+.k-ikon {
+    width: 65px;
+    height: 65px;
+    background: #f1f5f9;
+    color: #0b283d;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.k-card:hover .k-ikon {
+    background: #0b283d;
+    color: #00B4D8;
+}
+
+.k-card h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #0b283d;
+    margin-bottom: 12px;
+}
+
+.k-card p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* =========================================
+   RESPONSIVE TABLET & MOBILE
+   ========================================= */
+@media (max-width: 992px) {
+    .k-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sejarah-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 40px 30px;
+    }
+    
+    .garis-aksen {
+        margin: 0 auto 20px auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-hero {
+        padding: 50px 15px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+
+    .info-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .info-hero p {
+        font-size: 0.95rem;
+    }
+
+    .sejarah-container {
+        padding: 30px 20px;
+    }
+
+    .sejarah-teks h2 {
+        font-size: 1.6rem;
+    }
+
+    .sejarah-teks p {
+        font-size: 0.95rem;
+    }
+
+    .keunggulan-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .k-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .k-card {
+        padding: 25px 20px;
+    }
+}
+/* =========================================
+   4. HALAMAN PORTOFOLIO & GALERI FILTER
+   ========================================= */
+.porto-hero {
+    background: linear-gradient(135deg, #103A57 0%, #0b283d 100%);
+    margin-bottom: 30px;
+}
+
+.porto-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px 20px;
+}
+
+.porto-filter-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.porto-btn {
+    background: #ffffff;
+    color: #555;
+    border: 2px solid #e2e8f0;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.porto-btn:hover {
+    border-color: #00B4D8;
+    color: #00B4D8;
+}
+
+.porto-btn.active {
+    background: #00B4D8;
+    color: #ffffff;
+    border-color: #00B4D8;
+    box-shadow: 0 5px 15px rgba(0, 180, 216, 0.3);
+}
+
+.porto-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.porto-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.porto-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.porto-item:hover img {
+    transform: scale(1.1);
+}
+
+.porto-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(11, 40, 61, 0.9) 0%, rgba(11, 40, 61, 0.2) 60%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.porto-item:hover .porto-overlay {
+    opacity: 1;
+}
+
+.porto-overlay h4 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.porto-overlay p {
+    color: #72efdd;
+    font-size: 0.85rem;
+    transform: translateY(20px);
+    transition: transform 0.3s ease 0.1s;
+}
+
+.porto-item:hover .porto-overlay h4,
+.porto-item:hover .porto-overlay p {
+    transform: translateY(0);
+}
+
+@media (max-width: 992px) {
+    .porto-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .porto-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .porto-item img {
+        height: 220px;
+    }
+    .porto-overlay {
+        opacity: 1; /* Di HP teksnya dimunculkan saja karena tidak ada hover */
+        background: linear-gradient(to top, rgba(11, 40, 61, 0.85) 0%, transparent 100%);
+    }
+    .porto-overlay h4, .porto-overlay p {
+        transform: translateY(0);
+    }
+}
+/* =========================================
+   5. HALAMAN TESTIMONI PELANGGAN
+   ========================================= */
+.testi-hero {
+    background: linear-gradient(135deg, #00B4D8 0%, #0b283d 100%);
+    margin-bottom: 40px;
+}
+
+.testi-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px 50px 20px;
+}
+
+.testi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.testi-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 35px 30px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.04);
+    border: 1px solid #eef2f6;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.testi-card:hover {
+    transform: translateY(-5px);
+    border-color: #00B4D8;
+    box-shadow: 0 10px 30px rgba(0, 180, 216, 0.1);
+}
+
+.testi-stars {
+    color: #ffc107;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.testi-quote {
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.testi-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-top: 1px solid #eef2f6;
+    padding-top: 20px;
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    background: #eef7f9;
+    color: #00B4D8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.author-info h4 {
+    color: #0b283d;
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.author-info span {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+    .testi-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .testi-card {
+        padding: 25px 20px;
+    }
+}

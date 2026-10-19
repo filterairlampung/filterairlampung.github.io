@@ -1,0 +1,504 @@
+/* =========================================
+   DESAIN HALAMAN DETAIL SPESIFIKASI
+   ========================================= */
+
+/* Latar belakang halaman sedikit abu-abu agar container putih menonjol */
+.detail-page {
+    background-color: #f8f9fb;
+}
+
+/* Mengatur jarak main khusus halaman detail agar tidak sempit oleh style.css */
+.detail-page main {
+    padding: 40px 20px 80px 20px !important;
+    text-align: left;
+}
+
+/* 1. Breadcrumb (Jejak Navigasi) */
+.breadcrumb {
+    max-width: 1200px;
+    margin: 0 auto 20px auto;
+    padding: 0 30px;
+    font-size: 0.9rem;
+    color: #666;
+    text-align: left;
+}
+
+.breadcrumb a {
+    color: #0b283d;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.breadcrumb a:hover {
+    color: #00a8cc;
+    text-decoration: underline;
+}
+
+.breadcrumb span {
+    color: #888;
+}
+
+/* 2. Container Utama (Grid Split Layout) */
+.detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* =========================================
+   KOLOM KIRI: VISUAL & FOTO
+   ========================================= */
+.visual-sticky {
+    position: sticky;
+    top: 100px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    border: 1px solid #eaeaea;
+    text-align: left;
+}
+
+.badge-hijau {
+    display: inline-block;
+    background-color: #28a745;
+    color: #fff;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+.img-utama {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    border-bottom: 5px solid #00a8cc;
+    display: block;
+}
+
+.info-pengiriman {
+    margin-top: 15px;
+    background: #eef7f9;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid #00a8cc;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* =========================================
+   KOLOM KANAN: INFORMASI & SPESIFIKASI
+   ========================================= */
+.detail-info {
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    border: 1px solid #eaeaea;
+    text-align: left;
+}
+
+.detail-info h1 {
+    color: #0b283d;
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.harga-utama {
+    color: #00a8cc;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.deskripsi-singkat {
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Tombol WhatsApp Raksasa */
+.btn-pesan-wa {
+    display: block;
+    background-color: #25D366;
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 40px;
+    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-pesan-wa:hover {
+    background-color: #1ebe5d;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.5);
+}
+
+/* Kotak Spesifikasi */
+.spesifikasi-box {
+    margin-bottom: 40px;
+}
+
+.spek-kategori {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.spek-kategori:last-child {
+    border-bottom: none;
+}
+
+.spek-kategori h3 {
+    color: #0b283d;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+}
+
+.spek-kategori ul {
+    list-style: none;
+    padding-left: 25px;
+    text-align: left;
+}
+
+.spek-kategori ul li {
+    position: relative;
+    margin-bottom: 10px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.spek-kategori ul li::before {
+    content: '✓';
+    position: absolute;
+    left: -25px;
+    color: #00a8cc;
+    font-weight: bold;
+}
+
+/* Kotak Bonus Khusus */
+.bonus-box {
+    background: #fff8e1;
+    border: 1px dashed #ffc107;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.bonus-box h3 {
+    color: #d39e00;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.bonus-box ul {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.bonus-box ul li {
+    position: relative;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 500;
+}
+
+.bonus-box ul li::before {
+    content: '•';
+    position: absolute;
+    left: -20px;
+    color: #d39e00;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* =========================================
+   FITUR SHARE SOSIAL MEDIA
+   ========================================= */
+.share-section {
+    margin-top: 40px;
+    padding-top: 25px;
+    border-top: 2px dashed #eee;
+}
+
+.share-section h4 {
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.share-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-share {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-share:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+.btn-share.fb { background-color: #1877F2; }
+.btn-share.wa { background-color: #25D366; }
+.btn-share.x { background-color: #000000; }
+.btn-share.tg { background-color: #0088cc; }
+.btn-share.pi { background-color: #E60023; }
+.btn-share.ig { 
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+}
+.btn-share.link { background-color: #6c757d; }
+
+/* =========================================
+   FITUR KOMENTAR & DISKUSI
+   ========================================= */
+.komentar-wrapper {
+    max-width: 1200px;
+    margin: 50px auto 0 auto;
+    padding: 0 30px;
+}
+
+.komentar-section {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+.komentar-section h3 {
+    color: #0b283d;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #00a8cc;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+.form-komentar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.input-nama, .input-teks {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.input-teks {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.btn-kirim-komentar {
+    align-self: flex-start;
+    background-color: #0b283d;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-kirim-komentar:hover {
+    background-color: #00a8cc;
+}
+
+.komentar-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.komentar-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.komentar-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #e0e0e0;
+    color: #555;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.komentar-konten {
+    flex-grow: 1;
+}
+
+.komentar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.komentar-header strong {
+    color: #333;
+}
+
+.komentar-waktu {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.komentar-konten p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.admin-reply {
+    margin-left: 40px;
+    background-color: #f0f8ff;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #00a8cc;
+}
+
+.admin-avatar {
+    background-color: #0b283d;
+    color: #fff;
+}
+
+.badge-admin {
+    background-color: #00a8cc;
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* =========================================
+   PENYESUAIAN MOBILE (RESPONSIVE <= 768px)
+   ========================================= */
+@media (max-width: 768px) {
+    .detail-page main {
+        padding: 20px 10px 60px 10px !important;
+    }
+
+    .breadcrumb,
+    .detail-container {
+        padding: 0 10px;
+    }
+
+    .detail-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .visual-sticky {
+        position: static;
+        padding: 15px;
+    }
+
+    .detail-info {
+        padding: 25px 20px;
+    }
+
+    .detail-info h1 {
+        font-size: 1.6rem;
+    }
+
+    .harga-utama {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .btn-pesan-wa {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .spek-kategori h3,
+    .bonus-box h3 {
+        font-size: 1.1rem;
+        text-align: left;
+    }
+
+    /* Aturan komentar & share yang sudah masuk ke dalam @media mobile */
+    .komentar-wrapper {
+        padding: 0 10px;
+        margin-top: 30px;
+    }
+    
+    .komentar-section {
+        padding: 25px 20px;
+    }
+
+    .btn-share {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .admin-reply {
+        margin-left: 15px;
+        padding: 12px;
+    }
+
+    .komentar-item {
+        gap: 10px;
+    }
+
+    .komentar-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}

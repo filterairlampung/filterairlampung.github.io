@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Pemasangan - Al-Kautsar Bumindo</title>
+    
+    <!-- Memanggil CSS Global & Mobile Induk -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../mobile.css" media="screen and (max-width: 768px)">
+    
+    <!-- Memanggil FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Memanggil CSS Khusus Menu Info -->
+    <link rel="stylesheet" href="info.css">
+</head>
+<body class="info-page">
+
+    <!-- HEADER OTOMATIS -->
+    <header class="site-header"></header>
+
+    <main class="info-main">
+        
+        <!-- HERO PORTOFOLIO -->
+        <section class="info-hero porto-hero">
+            <div class="hero-content">
+                <span class="badge-profil">Galeri Proyek</span>
+                <h1>Portofolio Pemasangan & Bukti Nyata</h1>
+                <p>Dokumentasi hasil pengerjaan Instalasi Depot Air Minum, Filter Air Rumah Tangga, hingga proyek Water Treatment Plant (WTP) di berbagai wilayah Provinsi Lampung.</p>
+            </div>
+        </section>
+
+        <!-- BAGIAN FILTER & GRID GALERI -->
+        <section class="porto-section">
+            
+            <!-- Tombol Filter Kategori -->
+            <div class="porto-filter-container">
+                <button class="porto-btn active" data-filter="semua">Semua Proyek</button>
+                <button class="porto-btn" data-filter="damiu">Instalasi DAMIU</button>
+                <button class="porto-btn" data-filter="filter">Filter Air Tabung</button>
+                <button class="porto-btn" data-filter="proyek">WTP & Tangki</button>
+            </div>
+
+            <!-- Grid Galeri -->
+            <div class="porto-grid" id="porto-gallery">
+                
+                <!-- Item 1: DAMIU -->
+                <div class="porto-item" data-kategori="damiu">
+                    <img src="../Depot/damiu-sultan.JPG" alt="Pemasangan DAMIU Premium" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Depot Air Minum Sultan</h4>
+                        <p>Instalasi Full Kaca & Etalase Premium</p>
+                    </div>
+                </div>
+
+                <!-- Item 2: Filter Air -->
+                <div class="porto-item" data-kategori="filter">
+                    <img src="../images/Pemasangan-Tabung-Media-Pahoman.jpg" alt="Filter Air Pahoman" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Filter Air Rumah Tangga</h4>
+                        <p>Pemasangan 1 Tabung FRP Pahoman</p>
+                    </div>
+                </div>
+
+                <!-- Item 3: Tangki -->
+                <div class="porto-item" data-kategori="proyek">
+                    <img src="../tangki/tangki-2.jpeg" alt="Suplai Air Tangki" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Suplai Air Bersih</h4>
+                        <p>Pengiriman Armada Tangki 5000L</p>
+                    </div>
+                </div>
+
+                <!-- Item 4: WTP/Industri -->
+                <div class="porto-item" data-kategori="proyek">
+                    <img src="../images/Filter-Air-untuk-SPPG.jpg" alt="WTP Industri" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Water Treatment Plant</h4>
+                        <p>Sistem Skala Besar untuk Industri</p>
+                    </div>
+                </div>
+
+                <!-- Item 5: DAMIU -->
+                <div class="porto-item" data-kategori="damiu">
+                    <img src="../images/bg-damiu.jpg.jpg" alt="Depot Kombinasi RO" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Depot Kombinasi RO</h4>
+                        <p>Pemasangan Mesin RO 1000 GPD</p>
+                    </div>
+                </div>
+
+                <!-- Item 6: Filter Air -->
+                <div class="porto-item" data-kategori="filter">
+                    <img src="../Depot/filter-air-2.jpeg" alt="Filter Air 2 Tabung" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Filter Air 2 Tabung</h4>
+                        <p>Solusi Air Kuning & Bau Menyengat</p>
+                    </div>
+                </div>
+
+                <!-- Item 7: Filter Air -->
+                <div class="porto-item" data-kategori="filter">
+                    <img src="../images/Treatment-Air-Natar.jpg" alt="Treatment Air Natar" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Perawatan & Ganti Media</h4>
+                        <p>Servis Tabung Media Area Natar</p>
+                    </div>
+                </div>
+
+                <!-- Item 8: Tangki -->
+                <div class="porto-item" data-kategori="proyek">
+                    <img src="../tangki/tangki-3.jpeg" alt="Pengisian Tangki" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Distribusi Air Darurat</h4>
+                        <p>Pengisian Toren Kapasitas Besar</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER OTOMATIS -->
+    <footer class="site-footer"></footer>
+
+    <!-- Script Induk -->
+    <script src="../script.js"></script>
+
+    <!-- Script Filter Galeri dengan Transisi Halus -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const filterBtns = document.querySelectorAll('.porto-btn');
+            const portoItems = document.querySelectorAll('.porto-item');
+            const galleryGrid = document.getElementById('porto-gallery');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('active')) return;
+
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filterValue = this.getAttribute('data-filter');
+
+                    // Redupkan galeri sejenak (150ms) sebelum mengganti susunan foto
+                    galleryGrid.style.transition = 'opacity 0.15s ease';
+                    galleryGrid.style.opacity = '0';
+
+                    setTimeout(() => {
+                        portoItems.forEach(item => {
+                            const cocok = (filterValue === 'semua' || item.getAttribute('data-kategori') === filterValue);
+                            if (cocok) {
+                                item.style.display = 'block';
+                                // Reset ulang animasi CSS agar muncul lembut
+                                item.style.animation = 'none';
+                                item.offsetHeight; /* trigger reflow */
+                                item.style.animation = 'portoFadeIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                        galleryGrid.style.opacity = '1';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

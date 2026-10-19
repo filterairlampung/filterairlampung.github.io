@@ -1,0 +1,276 @@
+/* =========================================
+   PENGATURAN UMUM HALAMAN KATALOG FILTER AIR
+   ========================================= */
+body {
+    background-color: #f7f9fc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main.katalog-main {
+    padding: 50px 20px !important;
+}
+
+/* =========================================
+   HEADER & JUDUL KATALOG
+   ========================================= */
+.katalog-header {
+    text-align: center;
+    padding: 40px 30px;
+    background-color: #ffffff;
+    max-width: 850px;
+    margin: 20px auto 50px auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid #eaeaea;
+}
+
+.katalog-header h1 {
+    color: #0b283d;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.katalog-header p {
+    color: #555;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* =========================================
+   JUDUL PEMISAH PER KATEGORI PAKET
+   ========================================= */
+.kategori-header {
+    text-align: center;
+    margin: 50px auto 30px auto;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #eaeaea;
+    max-width: 1200px;
+    scroll-margin-top: 100px;
+}
+
+.kategori-header h2 {
+    color: #0b283d;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    font-weight: 800;
+}
+
+.kategori-header p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   TATA LETAK WADAH & KARTU PAKET (4 KOLOM DESKTOP)
+   ========================================= */
+.katalog-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 22px;
+    padding: 0 15px 40px 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.paket-card {
+    width: 270px; /* Pas untuk 4 kartu berjajar di layar Desktop */
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    border: 1px solid #eaeaea;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Kartu Lebar Khusus untuk Kategori Tunggal (WTP & Ganti Media) */
+.paket-card.card-lebar {
+    width: 420px;
+}
+
+.paket-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(11, 40, 61, 0.15);
+}
+
+/* LABEL / PITA 'TERLARIS' & 'SULTAN' */
+.badge-favorit {
+    position: absolute;
+    top: 15px;
+    right: -30px;
+    background: #28a745;
+    color: #ffffff;
+    padding: 5px 30px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transform: rotate(45deg);
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4);
+    z-index: 2;
+}
+
+.badge-favorit.badge-emas {
+    background: #d4af37;
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.4);
+}
+
+/* =========================================
+   GAMBAR & AREA TEKS DI DALAM KARTU
+   ========================================= */
+.paket-img {
+    width: 100%;
+    height: 195px;
+    object-fit: cover;
+    border-bottom: 4px solid #0b283d;
+}
+
+.paket-card.card-lebar .paket-img {
+    height: 220px;
+}
+
+.paket-info {
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.paket-subjudul {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #366B2B;
+    background-color: #eaf3e8;
+    padding: 4px 10px;
+    border-radius: 12px;
+    margin: 0 auto 8px auto;
+}
+
+.paket-info h3 {
+    color: #0b283d;
+    font-size: 1.18rem;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.paket-harga {
+    color: #00a8cc;
+    font-size: 1.45rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    border-bottom: 2px dashed #eee;
+    padding-bottom: 15px;
+}
+
+.paket-deskripsi {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+/* =========================================
+   TOMBOL AKSI KARTU
+   ========================================= */
+.btn-lihat-detail {
+    display: block;
+    text-align: center;
+    background-color: #0b283d;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 11px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.92rem;
+    transition: background 0.3s ease;
+    width: 100%;
+}
+
+.btn-lihat-detail:hover {
+    background-color: #00a8cc;
+}
+
+.btn-wa {
+    display: block;
+    text-align: center;
+    background-color: #25D366;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: background 0.3s ease;
+    width: 100%;
+}
+
+.btn-wa:hover {
+    background-color: #20b858;
+}
+
+/* =========================================
+   PENYESUAIAN MOBILE (RAPI 1 KOLOM)
+   ========================================= */
+@media (max-width: 768px) {
+    main.katalog-main {
+        padding: 20px 10px !important;
+    }
+
+    .katalog-header {
+        margin: 15px 5px 30px 5px;
+        padding: 25px 20px;
+    }
+
+    .katalog-header h1 {
+        font-size: 1.55rem;
+    }
+
+    .kategori-header {
+        margin: 35px 5px 20px 5px;
+    }
+
+    .kategori-header h2 {
+        font-size: 1.4rem;
+    }
+
+    .katalog-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 5px 35px 5px;
+        gap: 22px;
+    }
+
+    .paket-card,
+    .paket-card.card-lebar {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .paket-img {
+        height: 200px;
+    }
+
+    .paket-info {
+        padding: 20px;
+    }
+
+    .paket-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .paket-deskripsi {
+        font-size: 0.95rem;
+    }
+
+    .btn-lihat-detail,
+    .btn-wa {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+}

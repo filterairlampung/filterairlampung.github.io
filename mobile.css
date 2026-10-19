@@ -1,0 +1,491 @@
+/* Kunci Anti-Goyang (Mencegah Horizontal Scroll) */
+body, html {
+    overflow-x: hidden !important;
+    width: 100%;
+}
+
+main {
+    padding: 20px 15px !important;
+}
+
+.header-container {
+    padding: 10px 15px;
+}
+
+/* =========================================
+   HEADER & TOMBOL HAMBURGER MELAYANG
+   ========================================= */
+.site-header,
+header {
+    position: relative !important;
+    width: 100% !important;
+    background-color: #0b283d !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 5px 10px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+    z-index: 999 !important;
+}
+
+.site-header img,
+.logo img,
+header img {
+    max-width: 75px !important;
+    height: auto !important;
+}
+
+.hamburger-menu,
+#mobile-menu,
+.menu-toggle {
+    display: flex !important;
+    flex-direction: column !important;
+    position: fixed !important;
+    top: 15px !important;
+    right: 15px !important;
+    z-index: 99999 !important;
+    background-color: rgba(11, 40, 61, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    cursor: pointer;
+    gap: 4px !important;
+}
+
+.hamburger-menu span,
+#mobile-menu span,
+.menu-toggle span {
+    background-color: #ffffff !important;
+    display: block;
+    height: 3px;
+    width: 25px;
+    margin: 0 !important;
+    transition: all 0.3s ease;
+}
+
+/* =========================================
+   POSISI SIDEBAR & MULTI-LEVEL DROPDOWN MOBILE
+   ========================================= */
+.main-nav {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 78% !important;
+    max-width: 330px !important;
+    height: 100vh !important;
+    background-color: #0b283d !important;
+    padding-top: 0 !important;
+    padding-bottom: 40px !important;
+    z-index: 9998 !important;
+    box-sizing: border-box !important;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.6) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    transform: translateX(100%) !important;
+    transition: transform 0.4s ease-in-out !important;
+    overflow-y: auto !important;
+}
+
+.main-nav.active {
+    transform: translateX(0) !important;
+}
+
+.sidebar-header-text {
+    display: block !important;
+    width: 100% !important;
+    color: #ffffff !important;
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    padding: 20px 65px 15px 20px !important;
+    margin-bottom: 20px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+    line-height: 1.4 !important;
+}
+
+.main-nav .btn-hubungi, 
+a.btn-hubungi {
+    display: none !important;
+}
+
+ul.nav-menu {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+ul.nav-menu > li {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin-bottom: 18px !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+ul.nav-menu > li.active {
+    z-index: 10 !important;
+}
+
+ul.nav-menu > li > a {
+    display: inline-flex !important;
+    color: #FCFDFF !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+}
+
+/* --- DROPDOWN TINGKAT 1 (MOBILE) --- */
+ul.nav-menu > li.has-dropdown {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+ul.dropdown-menu {
+    display: none !important;
+    position: static !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 12px 0 0 0 !important;
+    box-shadow: none !important;
+    border-top: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.has-dropdown.active > ul.dropdown-menu {
+    display: flex !important;
+}
+
+ul.dropdown-menu > li {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 10px !important;
+    text-align: center !important;
+}
+
+ul.dropdown-menu > li > a {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 0.95rem !important;
+    color: #a9c6d9 !important;
+    font-weight: 600 !important;
+    padding: 6px 12px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* --- DROPDOWN TINGKAT 2 / SUB-DROPDOWN (MOBILE) --- */
+ul.sub-dropdown-menu {
+    display: none !important;
+    position: static !important;
+    flex-direction: column !important;
+    width: 85% !important;
+    margin: 8px auto 10px auto !important;
+    padding: 10px 0 !important;
+    background-color: rgba(0, 0, 0, 0.25) !important;
+    border-left: 3px solid #00B4D8 !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.has-sub-dropdown.active > ul.sub-dropdown-menu {
+    display: flex !important;
+}
+
+ul.sub-dropdown-menu li {
+    width: 100% !important;
+    margin-bottom: 8px !important;
+    text-align: center !important;
+}
+
+ul.sub-dropdown-menu li:last-child {
+    margin-bottom: 0 !important;
+}
+
+ul.sub-dropdown-menu li a {
+    display: inline-block !important;
+    font-size: 0.88rem !important;
+    color: #ffffff !important;
+    font-weight: normal !important;
+    padding: 4px 10px !important;
+}
+
+/* Matikan jembatan hover desktop di mobile */
+.has-dropdown::after,
+.has-sub-dropdown::after {
+    display: none !important;
+}
+
+ul.dropdown-menu li a:focus,
+ul.dropdown-menu li a:active,
+.nav-menu a:focus,
+.nav-menu a:active {
+    outline: none !important;
+    background-color: transparent !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* =========================================
+   HERO SECTION MOBILE
+   ========================================= */
+.hero-section {
+    position: relative !important;
+    background: linear-gradient(135deg, rgba(16, 58, 87, 0.95) 0%, rgba(11, 37, 56, 0.95) 100%), url('images/Air-Jernih.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    width: calc(100% + 30px) !important;
+    margin-top: -20px !important;
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+    padding: 25px 15px 25px 15px !important;
+    color: #FCFDFF !important;
+    border-radius: 0 0 24px 24px !important;
+    box-sizing: border-box !important;
+}
+
+.hero-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 10px 5px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.hero-text {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 10px !important;
+    text-align: center !important;
+}
+
+.hero-text h1, 
+.hero-content h1 {
+    font-size: 1.55rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 12px !important;
+}
+
+.hero-text p {
+    font-size: 0.88rem !important;
+    line-height: 1.45 !important;
+    margin-bottom: 15px !important;
+    color: #d0e1ed !important;
+}
+
+.hero-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.hero-buttons a,
+.hero-buttons button {
+    flex: 1 1 0 !important;
+    padding: 10px 8px !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    border-radius: 8px !important;
+}
+
+.hero-image-container {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin-top: 5px !important;
+}
+
+.hero-image,
+.hero-image-container img {
+    width: 100% !important;
+    max-width: 280px !important;
+    height: auto !important;
+    display: block !important;
+    margin: 10px auto 0 auto !important;
+}
+
+/* =========================================
+   GATEWAY, SEARCH BAR, & KARTU EDUKASI
+   ========================================= */
+.gateway-container {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: -20px;
+    padding: 0 5px;
+    gap: 12px;
+}
+
+@media screen and (max-width: 480px) {
+    .gateway-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.search-and-solve {
+    width: 100% !important;
+    max-width: 95vw !important;
+    margin: 10px auto 30px auto !important;
+    padding: 15px 5px !important;
+    box-sizing: border-box !important;
+}
+
+.search-bar,
+.search-box {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    gap: 8px !important;
+    box-sizing: border-box !important;
+    margin: 0 0 25px 0 !important;
+    padding: 0 !important;
+}
+
+.search-bar input,
+.search-and-solve input {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    font-size: 0.85rem !important;
+    padding: 12px 14px !important;
+    border-radius: 8px !important;
+}
+
+.search-bar button.btn-cari,
+.search-and-solve button {
+    flex: 0 0 auto !important;
+    padding: 12px 18px !important;
+    font-size: 0.85rem !important;
+    white-space: nowrap !important;
+    border-radius: 8px !important;
+}
+
+.benefits-container,
+.media-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* =========================================
+   PORTOFOLIO MOBILE (2 KOLOM RAPI)
+   ========================================= */
+.portfolio-section, 
+.portofolio-section {
+    padding: 30px 5px !important;
+    overflow: hidden !important;
+}
+
+.portfolio-grid,
+.portfolio-container, 
+.portofolio-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+}
+
+.portfolio-item,
+.portfolio-card, 
+.portofolio-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.portfolio-img,
+.portfolio-card img, 
+.portofolio-card img {
+    width: 100% !important;
+    height: 120px !important;
+    background-size: cover !important;
+    background-position: center !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+.portfolio-item p,
+.portfolio-card h3, 
+.portofolio-card h3 {
+    font-size: 0.8rem !important;
+    padding: 10px 8px !important;
+    margin: 0 !important;
+    line-height: 1.35 !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+}
+
+/* =========================================
+   BEFORE-AFTER, CABANG, FORM, & FOOTER
+   ========================================= */
+.trust-section {
+    padding: 30px 5px !important;
+}
+
+.trust-container, 
+.before-after-container, 
+.cabang-container {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100%;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.lead-form-container {
+    flex-direction: column;
+}
+
+.lead-form-text {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lead-form-box {
+    width: 100%;
+    padding: 25px 20px;
+}
+
+.alkautsar-form {
+    grid-template-columns: 1fr;
+}
+
+.form-group.full-width {
+    grid-column: span 1;
+}
+
+.float-wa {
+    width: 55px;
+    height: 55px;
+    bottom: 25px;
+    right: 20px;
+    z-index: 990 !important; /* Diubah dari 9990 menjadi 990 agar tertutup rapi oleh sidebar menu */
+}
