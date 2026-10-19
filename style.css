@@ -1397,3 +1397,148 @@ main {
     display: block !important;
     fill: currentColor !important;
 }
+/* =========================================
+   STYLING GLOBAL UNTUK KOMENTAR & BALASAN ADMIN
+   ========================================= */
+.komentar-wrapper {
+    max-width: 1200px;
+    margin: 50px auto 0 auto;
+    padding: 0 30px;
+}
+
+.komentar-section {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+.komentar-section h3 {
+    color: #0b283d;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #00a8cc;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+.form-komentar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.input-nama, .input-teks {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    background-color: #fcfcfc;
+    color: #333;
+}
+
+.input-teks {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.btn-kirim-komentar {
+    align-self: flex-start;
+    background-color: #0b283d;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-kirim-komentar:hover {
+    background-color: #00a8cc;
+}
+
+.komentar-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.komentar-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.komentar-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #e0e0e0;
+    color: #555;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.komentar-konten {
+    flex-grow: 1;
+}
+
+.komentar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.komentar-header strong {
+    color: #333;
+}
+
+.komentar-waktu {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.komentar-konten p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.admin-reply {
+    margin-left: 40px;
+    background-color: #f0f8ff;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #00a8cc;
+    margin-top: 10px;
+}
+
+.admin-avatar {
+    background-color: #0b283d;
+    color: #fff;
+}
+
+.badge-admin {
+    background-color: #00a8cc;
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
