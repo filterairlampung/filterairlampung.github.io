@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
                 <div class="social-links">
                     <!-- Logo Facebook -->
-                    <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" title="Facebook Al-Kautsar" aria-label="Facebook">
+                    <a href="https://www.facebook.com/share/1E2MzBoAVi/" target="_blank" title="Facebook Al-Kautsar" aria-label="Facebook">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 320 512" fill="currentColor">
                             <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
                         </svg>
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </a>
 
                     <!-- Logo Instagram -->
-                    <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" title="Instagram Al-Kautsar" aria-label="Instagram">
+                    <a href="https://www.instagram.com/filterairlampung?obrf=dXhwenZ3cjJ3MWdr" target="_blank" title="Instagram Al-Kautsar" aria-label="Instagram">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 448 512" fill="currentColor">
                             <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
                         </svg>
@@ -379,23 +379,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 // ==========================================
-// 6. MESIN KOMENTAR & BALASAN ADMIN OTOMATIS (GOOGLE SHEETS)
+// 6. MESIN KOMENTAR & BALASAN ADMIN OTOMATIS (ANTI-BLOKIR MOBILE)
 // ==========================================
 document.addEventListener("DOMContentLoaded", function() {
     const komentarSection = document.querySelector(".komentar-section");
     if (!komentarSection) return;
 
-    // URL Web App Google Apps Script Anda
     const KOMENTAR_APP_URL = "https://script.google.com/macros/s/AKfycbyvCrVdW96MpZRwurjSVUo5BN6K4nRbkMqLqFE7I3_WmYwieNhsSdHqh_PoYfUSLw4o/exec";
 
-    // Deteksi nama file halaman secara otomatis & pastikan selalu berakhiran .html
+    // Normalisasi nama halaman agar identik di PC dan HP
     const pathParts = window.location.pathname.split("/").filter(Boolean);
     let halamanId = pathParts[pathParts.length - 1] || "detail-paket";
     if (!halamanId.endsWith(".html")) {
         halamanId += ".html";
     }
 
-    // Bangun tampilan Form & Daftar Komentar sesuai class di detail.css
     komentarSection.innerHTML = `
         <h3>💬 Diskusi & Pertanyaan</h3>
         <form id="form-diskusi-paket" class="form-komentar">
@@ -413,14 +411,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const btnSubmit = document.getElementById("btn-submit-komen");
     let daftarKomentarSaatIni = [];
 
-    // Fungsi pengaman teks HTML
     function escapeHTML(str) {
         return String(str || "").replace(/[&<>"']/g, function(m) {
             return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m];
         });
     }
 
-    // Fungsi merender daftar komentar & balasan Admin
     function renderKomentar(dataList) {
         if (!dataList || dataList.length === 0) {
             listContainer.innerHTML = `<p style="color:#888; font-size:0.92rem; font-style:italic;">Belum ada diskusi di paket ini. Jadilah yang pertama bertanya!</p>`;
@@ -443,7 +439,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             `;
 
-            // Jika kolom Balasan Admin di Google Sheets sudah diisi, tampilkan di bawahnya
             if (item.balasan && String(item.balasan).trim() !== "") {
                 html += `
                     <div class="komentar-item admin-reply">
@@ -463,32 +458,40 @@ document.addEventListener("DOMContentLoaded", function() {
         listContainer.innerHTML = html;
     }
 
-    // 1. Tarik daftar komentar dari Google Sheets
+    // 1. Tarik daftar komentar dari Google Sheets (Support Mobile Redirect)
     function muatKomentar() {
-        if (!KOMENTAR_APP_URL) {
-            renderKomentar([]);
-            return;
-        }
+        const urlFetch = `${KOMENTAR_APP_URL}?halaman=${encodeURIComponent(halamanId)}&t=${new Date().getTime()}`;
 
-        fetch(`${KOMENTAR_APP_URL}?halaman=${encodeURIComponent(halamanId)}&t=${new Date().getTime()}`)
-            .then(res => res.json())
-            .then(data => {
-                if (Array.isArray(data) && data.length > 0) {
-                    daftarKomentarSaatIni = data;
-                    renderKomentar(daftarKomentarSaatIni);
-                } else {
-                    renderKomentar(daftarKomentarSaatIni);
-                }
-            })
-            .catch(err => {
-                console.warn("Gagal menarik komentar dari server:", err);
+        fetch(urlFetch, {
+            method: "GET",
+            redirect: "follow" // Wajib untuk Chrome Mobile saat memanggil Google Apps Script
+        })
+        .then(res => res.text()) // Gunakan .text() dulu agar tidak error jika Google mengembalikan teks
+        .then(text => {
+            const data = JSON.parse(text);
+            if (Array.isArray(data)) {
+                // Filter halaman secara fleksibel (mengabaikan perbedaan huruf besar/kecil atau .html)
+                const idBersih = halamanId.replace(".html", "").toLowerCase();
+                const hasilFilter = data.filter(item => {
+                    if (!item.halaman) return true;
+                    return String(item.halaman).toLowerCase().includes(idBersih);
+                });
+
+                daftarKomentarSaatIni = hasilFilter.length > 0 ? hasilFilter : data;
                 renderKomentar(daftarKomentarSaatIni);
-            });
+            } else {
+                renderKomentar(daftarKomentarSaatIni);
+            }
+        })
+        .catch(err => {
+            console.warn("Gagal memuat dari server di perangkat ini:", err);
+            renderKomentar(daftarKomentarSaatIni);
+        });
     }
 
     muatKomentar();
 
-    // 2. Kirim komentar baru saat tombol diklik
+    // 2. Kirim komentar baru
     formDiskusi.addEventListener("submit", function(e) {
         e.preventDefault();
         const nama = document.getElementById("komen-nama").value.trim();
@@ -498,17 +501,18 @@ document.addEventListener("DOMContentLoaded", function() {
         btnSubmit.disabled = true;
         btnSubmit.textContent = "Mengirim...";
 
+        const sekarang = new Date();
+        const waktuFormat = `${String(sekarang.getDate()).padStart(2, '0')}-${String(sekarang.getMonth() + 1).padStart(2, '0')}-${sekarang.getFullYear()} ${String(sekarang.getHours()).padStart(2, '0')}:${String(sekarang.getMinutes()).padStart(2, '0')}`;
+
         const payload = {
             action: "kirim_komentar",
             halaman: halamanId,
             nama: nama,
-            komentar: komentar
+            komentar: komentar,
+            waktu: waktuFormat
         };
 
-        // Tampilkan langsung di layar (Optimistic UI) agar pengguna langsung melihat komentarnya
-        const sekarang = new Date();
-        const waktuFormat = `${String(sekarang.getDate()).padStart(2, '0')}-${String(sekarang.getMonth() + 1).padStart(2, '0')}-${sekarang.getFullYear()} ${String(sekarang.getHours()).padStart(2, '0')}:${String(sekarang.getMinutes()).padStart(2, '0')}`;
-        
+        // Tampilkan langsung di layar
         daftarKomentarSaatIni.unshift({
             waktu: waktuFormat,
             halaman: halamanId,
@@ -518,7 +522,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         renderKomentar(daftarKomentarSaatIni);
 
-        // Kirim ke Google Apps Script menggunakan text/plain agar lolos aturan CORS browser
         fetch(KOMENTAR_APP_URL, {
             method: "POST",
             mode: "no-cors",
@@ -528,7 +531,6 @@ document.addEventListener("DOMContentLoaded", function() {
             formDiskusi.reset();
             btnSubmit.disabled = false;
             btnSubmit.textContent = "Kirim Pertanyaan / Ulasan";
-            // Sinkronisasi ulang dari Google Sheets setelah 2,5 detik
             setTimeout(muatKomentar, 2500);
         }).catch(() => {
             btnSubmit.disabled = false;
