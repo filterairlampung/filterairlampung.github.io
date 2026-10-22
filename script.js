@@ -385,14 +385,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const komentarSection = document.querySelector(".komentar-section");
     if (!komentarSection) return;
 
-    // Gunakan URL Web App Google Apps Script yang sama dengan Form Konsultasi
+    // URL Web App Google Apps Script Anda
     const KOMENTAR_APP_URL = "https://script.google.com/macros/s/AKfycbyvCrVdW96MpZRwurjSVUo5BN6K4nRbkMqLqFE7I3_WmYwieNhsSdHqh_PoYfUSLw4o/exec";
 
-    // Deteksi nama file halaman secara otomatis (contoh: detail-kombinasi-200.html)
-    const pathParts = window.location.pathname.split("/");
-    const halamanId = pathParts[pathParts.length - 1] || "detail-paket";
+    // Deteksi nama file halaman secara otomatis & pastikan selalu berakhiran .html
+    const pathParts = window.location.pathname.split("/").filter(Boolean);
+    let halamanId = pathParts[pathParts.length - 1] || "detail-paket";
+    if (!halamanId.endsWith(".html")) {
+        halamanId += ".html";
+    }
 
-    // Bangun tampilan Form & Daftar Komentar sesuai class di detail.css Anda
+    // Bangun tampilan Form & Daftar Komentar sesuai class di detail.css
     komentarSection.innerHTML = `
         <h3>💬 Diskusi & Pertanyaan</h3>
         <form id="form-diskusi-paket" class="form-komentar">
@@ -408,6 +411,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const listContainer = document.getElementById("daftar-komentar-container");
     const formDiskusi = document.getElementById("form-diskusi-paket");
     const btnSubmit = document.getElementById("btn-submit-komen");
+    let daftarKomentarSaatIni = [];
 
     // Fungsi pengaman teks HTML
     function escapeHTML(str) {
@@ -432,15 +436,15 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div class="komentar-konten">
                         <div class="komentar-header">
                             <strong>${escapeHTML(item.nama)}</strong>
-                            <span class="komentar-waktu">• ${escapeHTML(item.waktu)}</span>
+                            <span class="komentar-waktu">• ${escapeHTML(item.waktu || "Baru saja")}</span>
                         </div>
                         <p>${escapeHTML(item.komentar)}</p>
                     </div>
                 </div>
             `;
 
-            // Jika kolom Balasan Admin di Google Sheets sudah diisi, tampilkan di bawahnya!
-            if (item.balasan && item.balasan.trim() !== "") {
+            // Jika kolom Balasan Admin di Google Sheets sudah diisi, tampilkan di bawahnya
+            if (item.balasan && String(item.balasan).trim() !== "") {
                 html += `
                     <div class="komentar-item admin-reply">
                         <div class="komentar-avatar admin-avatar">A</div>
@@ -459,44 +463,26 @@ document.addEventListener("DOMContentLoaded", function() {
         listContainer.innerHTML = html;
     }
 
-    // 1. Tarik daftar komentar dari Google Sheets dengan aman
+    // 1. Tarik daftar komentar dari Google Sheets
     function muatKomentar() {
-        if (!KOMENTAR_APP_URL || KOMENTAR_APP_URL === "https://script.google.com/macros/s/AKfycbyvCrVdW96MpZRwurjSVUo5BN6K4nRbkMqLqFE7I3_WmYwieNhsSdHqh_PoYfUSLw4o/exec") {
+        if (!KOMENTAR_APP_URL) {
             renderKomentar([]);
             return;
         }
 
-        // Ambil data asli dari Google Sheets secara langsung
         fetch(`${KOMENTAR_APP_URL}?halaman=${encodeURIComponent(halamanId)}&t=${new Date().getTime()}`)
             .then(res => res.json())
             .then(data => {
-                // Jika Google Sheets mengembalikan data (meskipun kosong atau berisi)
                 if (Array.isArray(data) && data.length > 0) {
-                    renderKomentar(data);
+                    daftarKomentarSaatIni = data;
+                    renderKomentar(daftarKomentarSaatIni);
                 } else {
-                    // Jika tab Data_Komentar kosong, tampilkan teks kosong yang elegan
-                    listContainer.innerHTML = `<p style="color:#888; font-size:0.92rem; font-style:italic;">Belum ada diskusi di paket ini. Jadilah yang pertama bertanya!</p>`;
+                    renderKomentar(daftarKomentarSaatIni);
                 }
             })
             .catch(err => {
-                console.log("Catatan koneksi:", err);
-                // Data cadangan lokal jika sedang offline / terhalang CORS lokal
-                renderKomentar([
-                    {
-                        waktu: "19-10-2026 14:27",
-                        halaman: "detail-sultan.html",
-                        nama: "Bara",
-                        komentar: "Apakah ini bisa untuk menyelesaikan masalah air rumah saya?",
-                        balasan: "Iya bisa, silakan lakukan pemesanan"
-                    },
-                    {
-                        waktu: "19-10-2026 14:15",
-                        halaman: "detail-sultan.html",
-                        nama: "Bara",
-                        komentar: "apakah dengan paket ini bisa menyelesaikan masalah air rumahan?",
-                        balasan: "Iya bisa, silakan lakukan pemesanan"
-                    }
-                ]);
+                console.warn("Gagal menarik komentar dari server:", err);
+                renderKomentar(daftarKomentarSaatIni);
             });
     }
 
@@ -519,17 +505,31 @@ document.addEventListener("DOMContentLoaded", function() {
             komentar: komentar
         };
 
+        // Tampilkan langsung di layar (Optimistic UI) agar pengguna langsung melihat komentarnya
+        const sekarang = new Date();
+        const waktuFormat = `${String(sekarang.getDate()).padStart(2, '0')}-${String(sekarang.getMonth() + 1).padStart(2, '0')}-${sekarang.getFullYear()} ${String(sekarang.getHours()).padStart(2, '0')}:${String(sekarang.getMinutes()).padStart(2, '0')}`;
+        
+        daftarKomentarSaatIni.unshift({
+            waktu: waktuFormat,
+            halaman: halamanId,
+            nama: nama,
+            komentar: komentar,
+            balasan: ""
+        });
+        renderKomentar(daftarKomentarSaatIni);
+
+        // Kirim ke Google Apps Script menggunakan text/plain agar lolos aturan CORS browser
         fetch(KOMENTAR_APP_URL, {
             method: "POST",
             mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
             body: JSON.stringify(payload)
         }).then(() => {
             formDiskusi.reset();
             btnSubmit.disabled = false;
             btnSubmit.textContent = "Kirim Pertanyaan / Ulasan";
-            // Muat ulang daftar komentar setelah 1,5 detik
-            setTimeout(muatKomentar, 1500);
+            // Sinkronisasi ulang dari Google Sheets setelah 2,5 detik
+            setTimeout(muatKomentar, 2500);
         }).catch(() => {
             btnSubmit.disabled = false;
             btnSubmit.textContent = "Kirim Pertanyaan / Ulasan";
