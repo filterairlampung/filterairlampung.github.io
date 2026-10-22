@@ -7,7 +7,7 @@
 // 1. KONFIGURASI UTAMA
 // Tempelkan link Google Sheets Anda (format /edit?usp=sharing) di dalam tanda kutip di bawah ini:
 const GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1agFOJb55H9IF1i7Cqn7Bbj4tMTcTNgrR7b3sHtpVJQM/edit?usp=sharing";
-const NOMOR_WA_ADMIN = "6281211108724";
+const NOMOR_WA_ADMIN = "6287811556037";
 const STORAGE_KEY_CART = "alkautsar_keranjang_v1";
 
 // 2. DATA CONTOH (FALLBACK DATA)

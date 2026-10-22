@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </ul>
                 </nav>
 
-                <a href="https://wa.me/6281211108724" class="btn-hubungi" target="_blank">Hubungi Kami</a>
+                <a href="https://wa.me/6287811556037" class="btn-hubungi" target="_blank">Hubungi Kami</a>
             </div>
         `;
     }
@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // URL Web App Google Apps Script Anda (Ganti dengan URL hasil Deploy di Langkah 2)
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyvCrVdW96MpZRwurjSVUo5BN6K4nRbkMqLqFE7I3_WmYwieNhsSdHqh_PoYfUSLw4o/exec"; 
-    const NOMOR_WA_ADMIN = "6281211108724";
+    const NOMOR_WA_ADMIN = "6287811556037";
 
     if (formKonsultasi) {
         formKonsultasi.addEventListener("submit", function(e) {
